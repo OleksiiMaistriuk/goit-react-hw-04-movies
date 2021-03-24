@@ -1,36 +1,35 @@
 import { Component } from 'react';
-import axios from 'axios';
 
-class Reviews extends Component {
+import { getReviews } from '../servis/moviesApi';
+
+export default class Reviews extends Component {
   state = {
     reviews: [],
   };
-  async componentDidMount() {
-    const { movieId } = this.props.match.params;
-    await axios
-      .get(
-        `  https://api.themoviedb.org/3//movie/${movieId}/reviews?api_key=79121d9cf6a0bcf9a51dd363b9565e52`,
-      )
-      .then(response => this.setState({ reviews: response.data.results }));
 
-    console.log(this.state.reviews);
+  async componentDidMount() {
+    const { moviesId } = this.props.match.params;
+    const response = await getReviews(moviesId);
+    this.setState({ reviews: response.data.results });
   }
 
   render() {
+    const { reviews } = this.state;
+
     return (
       <>
-        {(this.state.reviews.length && (
+        {reviews && (
           <ul>
-            {this.state.reviews.map(review => (
-              <li key={review.id}>
-                <h3>Author: {review.author}</h3>
-                <p>{review.content}</p>
+            {reviews.map(({ id, author, content }) => (
+              <li key={id}>
+                <h3>name: {author}</h3>
+                <p>{content}</p>
               </li>
             ))}
           </ul>
-        )) || <p>We don't have any reviews for this movie</p>}
+        )}
+        {!reviews && "we don't have many reviews"}
       </>
     );
   }
 }
-export default Reviews;

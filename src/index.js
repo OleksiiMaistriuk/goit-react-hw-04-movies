@@ -3,12 +3,10 @@ import ReactDOM from 'react-dom';
 import App from './App';
 import 'modern-normalize/modern-normalize.css';
 import { BrowserRouter } from 'react-router-dom';
-
+import './index.css';
 ReactDOM.render(
   <BrowserRouter>
-    <React.StrictMode>
-      <App />
-    </React.StrictMode>
+    <App />
   </BrowserRouter>,
   document.getElementById('root'),
 );

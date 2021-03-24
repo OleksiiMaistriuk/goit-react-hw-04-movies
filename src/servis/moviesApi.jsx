@@ -4,29 +4,22 @@ axios.defaults.baseURL = 'https://api.themoviedb.org/3';
 axios.defaults.params = {
   api_key: '79121d9cf6a0bcf9a51dd363b9565e52',
 };
+export const getTrending = () => {
+  return axios.get(`/trending/movie/day`);
+};
 
-export const getApiAllDay = () => {
-  axios.get(`/all/day`).then(data => {
-    console.log(data);
-  });
-};
-export const getApiSearch = () => {
-  axios.get(`/search/movie&page=1`).then(data => {
-    console.log(data);
-  });
-};
 export const getApiADetails = movieId => {
-  axios.get(`/movie/${movieId}`).then(data => {
-    console.log(data);
-  });
+  return axios.get(`/movie/${movieId}`);
 };
-export const getApiActors = movieId => {
-  axios.get(`/movie/${movieId}/credits`).then(data => {
-    console.log(data);
-  });
+
+export const getActors = movieId => {
+  return axios.get(`/movie/${movieId}/credits`);
 };
-export const getApiReviews = movieId => {
-  axios.get(`/movie/${movieId}/reviews`).then(data => {
-    console.log(data);
-  });
+
+export const getSearch = movie => {
+  return axios.get(`/search/movie?query=${movie}`);
+};
+
+export const getReviews = movieId => {
+  return axios.get(`/movie/${movieId}/reviews`);
 };
