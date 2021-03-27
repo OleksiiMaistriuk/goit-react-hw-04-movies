@@ -1,10 +1,8 @@
 import { lazy, Suspense } from 'react';
 import { Route, Switch } from 'react-router-dom';
 import routes from './routes';
+import Layout from './components/Layout';
 
-const Layout = lazy(() =>
-  import('./components/Layout' /* webpackChunkName: "Layout" */),
-);
 const HomePage = lazy(() =>
   import('./view/HomePage' /* webpackChunkName: "HomePage" */),
 );
@@ -18,15 +16,15 @@ const MovieDetailsPage = lazy(() =>
 );
 const App = () => (
   <>
-    <Suspense fallback={<h1>loading...</h1>}>
-      <Layout>
+    <Layout>
+      <Suspense fallback={<h1>loading...</h1>}>
         <Switch>
           <Route exact path={routes.homePage} component={HomePage} />
           <Route path={routes.detailsView} component={MovieDetailsPage} />
           <Route path={routes.moviesPage} component={Movies} />
         </Switch>
-      </Layout>
-    </Suspense>
+      </Suspense>
+    </Layout>
   </>
 );
 

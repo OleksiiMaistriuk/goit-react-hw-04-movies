@@ -7,7 +7,7 @@ const Cast = lazy(() =>
   import('../../components/Cast/Cast' /* webpackChunkName: "cast" */),
 );
 const Reviews = lazy(() =>
-  import('../../components/Reviews' /* webpackChunkName: "reviews" */),
+  import('../Reviews' /* webpackChunkName: "reviews" */),
 );
 
 class MovieDetailsPage extends Component {
