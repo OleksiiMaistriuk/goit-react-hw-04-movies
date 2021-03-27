@@ -4,7 +4,7 @@ import { getApiADetails } from '../../servis/moviesApi';
 import routes from '../../routes';
 import style from './MovieDetailsPage.module.css';
 const Cast = lazy(() =>
-  import('../../components/Cast' /* webpackChunkName: "cast" */),
+  import('../../components/Cast/Cast' /* webpackChunkName: "cast" */),
 );
 const Reviews = lazy(() =>
   import('../../components/Reviews' /* webpackChunkName: "reviews" */),
@@ -42,7 +42,7 @@ class MovieDetailsPage extends Component {
       poster_path,
       release_date,
     } = this.state;
-    // const popularityToPercent = Number((popularity * 10) / 100);
+
     return (
       <>
         <button type="button" onClick={this.handeGoBack}>
@@ -89,15 +89,16 @@ class MovieDetailsPage extends Component {
           </li>
         </ul>
         <hr></hr>
-
-        <Route
-          path={`${this.props.match.path}${routes.cast}`}
-          render={props => <Cast {...props} />}
-        />
-        <Route
-          path={`${this.props.match.path}${routes.reviews}`}
-          render={props => <Reviews {...props} />}
-        />
+        <Suspense fallback={<h1>loading...</h1>}>
+          <Route
+            path={`${this.props.match.path}${routes.cast}`}
+            render={props => <Cast {...props} />}
+          />
+          <Route
+            path={`${this.props.match.path}${routes.reviews}`}
+            render={props => <Reviews {...props} />}
+          />
+        </Suspense>
       </>
     );
   }

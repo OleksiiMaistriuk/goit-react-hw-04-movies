@@ -1,7 +1,6 @@
 import { Component } from 'react';
-
-import { getActors } from '../servis/moviesApi';
-
+import { getActors } from '../../servis/moviesApi';
+import style from './Cast.module.css';
 export default class Cast extends Component {
   state = {
     actors: [],
@@ -23,6 +22,7 @@ export default class Cast extends Component {
             {actors.map(({ id, name, character, profile_path }) => (
               <li key={id}>
                 <img
+                  className={style.castImg}
                   src={`https://image.tmdb.org/t/p/original/${profile_path}`}
                   alt={name}
                 />
